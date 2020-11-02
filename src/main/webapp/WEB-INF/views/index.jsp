@@ -16,7 +16,7 @@
 								<p class="text-center mb0">
 									We belive in the power of teams.  We take care of our employees, have fitness rooms 
 									and casual dress, and we don't believe in walls.
-									Test New Change
+									This is a first test
 								</p>
 							</div>
 						</div>
