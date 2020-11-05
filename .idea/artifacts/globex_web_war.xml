@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="globex-web:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>globex-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="globex-web.war">
+      <element id="artifact" artifact-name="globex-web:war exploded" />
+    </root>
+  </artifact>
+</component>
