@@ -1,0 +1,117 @@
+node {
+   def mvnHome
+   def buildnrIaS
+   def buildnrKIP
+   stage('Preparation KafkaClient') { // for display purposes
+     snDevOpsStep(enabled:true,ignoreErrors:true)
+      // Get some code from a GitHub repository
+      git branch: 'master', credentialsId: 'denniskuipers', url: 'https://github.com/denniskuipersSN/KafkaClient.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.
+      mvnHome = tool 'maven'
+   }
+   stage('Build KafkaClient') {
+      snDevOpsStep(enabled:true,ignoreErrors:true)
+      // Run the maven build
+      withEnv(["MVN_HOME=$mvnHome"]) {
+         if (isUnix()) {
+            sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean install'
+         } else {
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+         }
+      }
+     archiveArtifacts 'target/*.jar'
+     junit 'target/surefire-reports/*.xml'
+   }
+
+   stage('Preparation CorpSite') { // for display purposes
+     snDevOpsStep(enabled:true,ignoreErrors:true)
+      // Get some code from a GitHub repository
+      git branch: 'master', credentialsId: 'denniskuipers', url: 'https://github.com/denniskuipersSN/CorpSite.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.
+      mvnHome = tool 'maven'
+   }
+   stage('Build CoprSite') {
+      snDevOpsStep(enabled:true,ignoreErrors:true)
+      // Run the maven build
+      withEnv(["MVN_HOME=$mvnHome"]) {
+         if (isUnix()) {
+            sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean install'
+         } else {
+            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+         }
+      }
+      archiveArtifacts 'target/*.war'
+      junit 'target/surefire-reports/*.xml'
+   }
+    stage('Check Config') {
+        def jobname = "IaSPipeline"
+        def job = Jenkins.instance.getItemByFullName(jobname)
+        buildnrIaS = job.lastSuccessfulBuild.getNumber()+ 1
+        SWEAGLEUpload(
+            actionName: 'upload VM config to Sweagle',
+            fileLocation: "buildinfra.json",
+            format: 'json',
+            markFailed: false,
+            nodePath: 'azure,Demoden20'+buildnrIaS+',test78'+buildnrIaS,
+            onlyParent: false,
+            showResults: false,
+            withSnapshot: true,
+            subDirectories: true,
+            description: 'Upload json files',
+            tag: "$buildnrIaS",
+            autoRecognize: false,
+            allowDelete: true)
+       snDevOpsStep(enabled:true,ignoreErrors:true)
+       SWEAGLEValidate(
+        actionName: 'Validate Config Files',
+        mdsName: 'azure.Demoden20'+buildnrIaS+'.test78'+buildnrIaS,
+        stored: true,
+        warnMax: -1,
+        errMax: 0,
+        markFailed: true,
+        showResults: false,
+        retryCount: 5,
+        retryInterval: 30)
+        junit 'sweagle-validation.xml'
+   }
+    exit 0
+   stage('Run Test') {
+      snDevOpsStep(enabled:true,ignoreErrors:true)
+      //includeBuildInfo=true
+      snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "KafkaClient-1.0-SNAPSHOT.jar", "version": "1.0","semanticVersion": "1.0.0","repositoryName": "KafkaClient"}],"branchName": "master"}""")
+      snDevOpsPackage(name: "sentimentpackage", artifactsPayload: """{"artifacts":[{"name": "KafkaClient-1.0-SNAPSHOT.jar", "version": "1.0.0", "repositoryName": "KafkaClient"}],"branchName": "master"}""")
+   }
+   stage('UAT Test') {
+       snDevOpsStep(enabled:true,ignoreErrors:true)
+       junit 'target/surefire-reports/*.xml'
+   }
+
+   stage('Deploy Prod infra') {
+       snDevOpsStep(enabled:true,ignoreErrors:true)
+       build job: 'IaSPipeline', parameters: []
+       def jobname = "IaSPipeline"
+       def job = Jenkins.instance.getItemByFullName(jobname)
+       buildnrIaS = job.lastSuccessfulBuild.getNumber()
+       def WebSiteName ="test78"+buildnrIaS
+       print "${WebSiteName}"
+       buildnrKIP = currentBuild.number
+       print "${buildnrKIP}"
+   }
+   stage('Deploy Application on Prod') {
+      snDevOpsStep(enabled:true,ignoreErrors:true)
+      snDevOpsChange()
+      sh label: 'disable login', script: '#!/bin/bash +x'
+      sh('#!/bin/bash +x\n' + 'sudo cp /var/lib/jenkins/jobs/KafkaInfraPipeLine/builds/'+ buildnrKIP + '/archive/target/KafkaClient-1.0-SNAPSHOT.jar /opt/servicenow/agent/extlib/KafkaClient.jar')
+      sh('#!/bin/bash +x\n' + 'curl -X POST -v -u \'azuredkdeployment:V0ll3y@1234\' --data-binary @"/var/lib/jenkins/jobs/KafkaInfraPipeLine/builds/'+ buildnrKIP + '/archive/target/globex-web.war" https://test78' + buildnrIaS + '-appservice.scm.azurewebsites.net/api/wardeploy')
+      sh('#!/bin/bash +x\n' + 'curl "https://dennisdemoinstancedemo.service-now.com/api/snc/discoip?ip=172.31.31.73" --request GET --header "Accept:application/json" --user "admin":"Sh0wc@se" 1>/dev/null 2>/dev/null')
+      //sh label: 'Curl call SN Discovery', script: 'curl "https://dennisdemoinstancedemo.service-now.com/api/snc/discoip?ip=172.31.31.73" --request GET --header "Accept:application/json" --user "admin":"Sh0wc@se" 1>/dev/null 2>/dev/null'
+      //sh label: 'Stop MidServer', script:  'cd /opt/servicenow/agent; sudo ./stop.sh'
+      //sh label: 'Start MidServer', script: 'cd /opt/servicenow/agent; sudo ./start.sh'
+      //sh label: 'exit 1', script: './exit0.sh'
+   }
+
+}
