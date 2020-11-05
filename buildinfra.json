@@ -22,7 +22,7 @@
   "BusinessService":"",
   "AzureTf_vmSize":"Standard_D1_v2",
   "AzureTf_image_version":"latest",
-  "Application":"",
+  "Application":"Demo",
   "StackName":"test28'+buildNumber+'",
   "Location":"Azure Datacenter - australiacentral",
   "ResourceGroupName":""
