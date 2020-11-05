@@ -1,8 +1,8 @@
+ def mvnHome
+ def buildnrIaS
+ def buildnrKIP
 pipeline {
    agent any
-   def mvnHome
-   def buildnrIaS
-   def buildnrKIP
    stage('Preparation KafkaClient') { // for display purposes
      snDevOpsStep(enabled:true,ignoreErrors:true)
       // Get some code from a GitHub repository
