@@ -72,7 +72,7 @@ node {
         stored: true,
         warnMax: -1,
         errMax: 0,
-        markFailed: true,
+        markFailed: false,
         showResults: false,
         retryCount: 5,
         retryInterval: 30)
