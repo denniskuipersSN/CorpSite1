@@ -78,7 +78,6 @@ node {
         retryInterval: 30)
         junit 'sweagle-validation.xml'
    }
-    exit 0
    stage('Run Test') {
       snDevOpsStep(enabled:true,ignoreErrors:true)
       //includeBuildInfo=true
