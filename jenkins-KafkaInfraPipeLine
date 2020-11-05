@@ -5,7 +5,7 @@ node {
    stage('Preparation KafkaClient') { // for display purposes
      snDevOpsStep(enabled:true,ignoreErrors:true)
       // Get some code from a GitHub repository
-      git branch: 'master', credentialsId: 'denniskuipers', url: 'https://github.com/denniskuipersSN/KafkaClient.git'
+        git branch: 'master', credentialsId: 'denniskuipers', url: 'https://github.com/denniskuipersSN/KafkaClient.git'
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.
@@ -48,6 +48,7 @@ node {
       junit 'target/surefire-reports/*.xml'
    }
     stage('Check Config') {
+        snDevOpsStep(enabled:true,ignoreErrors:true)
         def jobname = "IaSPipeline"
         def job = Jenkins.instance.getItemByFullName(jobname)
         buildnrIaS = job.lastSuccessfulBuild.getNumber()+ 1
@@ -65,8 +66,7 @@ node {
             tag: "$buildnrIaS",
             autoRecognize: false,
             allowDelete: true)
-       snDevOpsStep(enabled:true,ignoreErrors:true)
-       SWEAGLEValidate(
+        SWEAGLEValidate(
         actionName: 'Validate Config Files',
         mdsName: 'azure.Demoden20'+buildnrIaS+'.test78'+buildnrIaS,
         stored: true,
