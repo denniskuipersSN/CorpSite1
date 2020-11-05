@@ -12,7 +12,6 @@
   "AzureTf_image_offer":"UbuntuServer",
   "AzureTf_test2":"vmadmin",
   "AzureTf_image_publisher":"Canonical",
-  "ResourceGroup":" ",
   "CreateResourceGroup":true,
   "AzureTf_admin_password":"admin01!",
   "AzureTf_prefix":"test78'+buildNumber+'",
@@ -25,5 +24,4 @@
   "Application":"Demo",
   "StackName":"test28'+buildNumber+'",
   "Location":"Azure Datacenter - australiacentral",
-  "ResourceGroupName":""
 }
