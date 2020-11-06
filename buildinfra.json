@@ -23,5 +23,5 @@
   "AzureTf_image_version":"latest",
   "Application":"Demo",
   "StackName":"test28'+buildNumber+'",
-  "Location":"Azure Datacenter - australiacentral",
+  "Location":"Azure Datacenter - australiacentral"
 }
