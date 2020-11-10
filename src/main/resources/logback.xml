@@ -11,7 +11,7 @@
         </layout>
     </appender>
 
-    <logger name="com.globex.web" level="debug"
+    <logger name="com.globex.web" level="info"
             additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>

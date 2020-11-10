@@ -24,7 +24,7 @@
                             <img class="logo logo-light" alt="Globex Corporation" src="resources/img/logo-light.png">
                             <img class="logo logo-dark" alt="Globex Corporation" src="resources/img/logo-dark.png">
                         </a>
-                        <span> - ${msg}</span>
+                        <span> Connecting.....</span>
                     </div>
                     <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
                         <i class="ti-menu"></i>

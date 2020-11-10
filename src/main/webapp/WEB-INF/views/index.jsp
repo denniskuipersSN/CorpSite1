@@ -17,6 +17,7 @@
 									We belive in the power of teams.  We take care of our employees, have fitness rooms 
 									and casual dress, and we don't believe in walls.
 									This is a first test to build the site This is a second test ...for great demo ITOM team
+									<span> - ${msg}</span>
 								</p>
 							</div>
 						</div>
