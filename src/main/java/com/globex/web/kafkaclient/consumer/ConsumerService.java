@@ -17,7 +17,7 @@ public class ConsumerService {
     @KafkaListener(id="test" , topics = "MetricTopic", groupId = MyKafkaProperties.CONSUMER_GROUP_ID)
     public void consumeMessages(String messageTopic){
         Message.setMessage(messageTopic);
-        //log.info("CONSUMER: We received a message!!! {}", messageTopic);
+        log.info("CONSUMER: We received a message!!! {}", messageTopic);
     }
 }
 
