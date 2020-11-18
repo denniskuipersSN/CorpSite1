@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="globex-web" target="7" />
+      <module name="globex-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
