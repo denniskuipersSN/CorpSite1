@@ -85,12 +85,12 @@
           <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.4" />
           <element id="library" level="project" name="Maven: org.apache.kafka:kafka_2.13:test:2.6.0" />
           <element id="library" level="project" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.0" />
+          <element id="library" level="project" name="Maven: org.apiguardian:apiguardian-api:1.1.0" />
           <element id="library" level="project" name="Maven: org.opentest4j:opentest4j:1.2.0" />
+          <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.7.0" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
-          <element id="library" level="project" name="Maven: org.apiguardian:apiguardian-api:1.0.0" />
-          <element id="library" level="project" name="Maven: org.junit.platform:junit-platform-commons:1.7.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-java:2.45.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-chrome-driver:2.45.0" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:selenium-remote-driver:2.45.0" />
