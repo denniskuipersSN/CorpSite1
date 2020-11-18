@@ -14,11 +14,9 @@
     <properties>
         <!-- https://maven.apache.org/general.html#encoding-warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <!--<maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>-->
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>5.3.0</spring.version>
         <junit-platform.version>5.3.1</junit-platform.version>
     </properties>
@@ -194,6 +192,7 @@
                 <configuration>
                     <argLine>-Dlog4j.configuration=src/main/java/resources/log4j.properties</argLine>
                     <argLine>--illegal-access=permit</argLine>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -201,7 +200,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
+                    <argLine>-Dlog4j.configuration=src/main/java/resources/log4j.properties</argLine>
                     <argLine>--illegal-access=permit</argLine>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
 

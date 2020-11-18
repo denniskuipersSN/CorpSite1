@@ -44,7 +44,7 @@ public class TestWelcome {
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"))
                 .andExpect(forwardedUrl("/WEB-INF/views/index.jsp"))
-                .andExpect(model().attribute("msg", "we're not evil"));
+                .andExpect(model().attribute("msg", "no Message yet"));
     }
 
     @Test
