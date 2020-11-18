@@ -36,7 +36,7 @@ public class TestWelcome {
     }
 
     @Test
-    public void testWelcome() throws Exception {
+    public void     testWelcome() throws Exception {
 
         this.mockMvc.perform(
                 get("/"))
