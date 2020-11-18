@@ -33,12 +33,12 @@ public class message {
         Date date = new Date();
 
         if (date.toString().equals(this.prev_date.toString())){
-           this.message =  this.prev_message + message.replaceAll("},","}\n");
+           this.message =  this.prev_message + message.replaceAll("}","}\n");
         }
         else{
              this.prev_message = "";
              this.message = "";
-;            this.message = date.toString() +  message.replaceAll("},","}\n");
+;            this.message = date.toString() +  message.replaceAll("}","}\n");
         }
         this.prev_date = date;
         this.prev_message = this.message;
