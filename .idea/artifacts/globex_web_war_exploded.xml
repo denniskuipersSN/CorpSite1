@@ -52,38 +52,6 @@
           <element id="library" level="project" name="Maven: com.github.luben:zstd-jni:1.4.4-7" />
           <element id="library" level="project" name="Maven: org.lz4:lz4-java:1.7.1" />
           <element id="library" level="project" name="Maven: org.xerial.snappy:snappy-java:1.1.7.3" />
-          <element id="library" level="project" name="Maven: org.springframework.kafka:spring-kafka-test:2.6.2" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:kafka-clients:test:2.6.0" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:kafka-streams:2.6.0" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:connect-json:2.6.0" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:connect-api:2.6.0" />
-          <element id="library" level="project" name="Maven: org.rocksdb:rocksdbjni:5.18.4" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:kafka-streams-test-utils:2.6.0" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:kafka_2.13:2.6.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-scala_2.13:2.10.2" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-paranamer:2.10.2" />
-          <element id="library" level="project" name="Maven: com.thoughtworks.paranamer:paranamer:2.8" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.10.2" />
-          <element id="library" level="project" name="Maven: net.sf.jopt-simple:jopt-simple:5.0.4" />
-          <element id="library" level="project" name="Maven: com.yammer.metrics:metrics-core:2.2.0" />
-          <element id="library" level="project" name="Maven: org.scala-lang.modules:scala-collection-compat_2.13:2.1.6" />
-          <element id="library" level="project" name="Maven: org.scala-lang.modules:scala-java8-compat_2.13:0.9.1" />
-          <element id="library" level="project" name="Maven: org.scala-lang:scala-library:2.13.2" />
-          <element id="library" level="project" name="Maven: org.scala-lang:scala-reflect:2.13.2" />
-          <element id="library" level="project" name="Maven: com.typesafe.scala-logging:scala-logging_2.13:3.9.2" />
-          <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.5.8" />
-          <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper-jute:3.5.8" />
-          <element id="library" level="project" name="Maven: org.apache.yetus:audience-annotations:0.5.0" />
-          <element id="library" level="project" name="Maven: io.netty:netty-handler:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-common:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-resolver:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-buffer:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-transport:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-codec:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-transport-native-epoll:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: io.netty:netty-transport-native-unix-common:4.1.48.Final" />
-          <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.4" />
-          <element id="library" level="project" name="Maven: org.apache.kafka:kafka_2.13:test:2.6.0" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
