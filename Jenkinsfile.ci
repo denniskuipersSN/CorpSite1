@@ -27,7 +27,7 @@ pipeline {
                 '''
 
                 sh 'mvn verify'
-
+                junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
                 script {
                     sshPublisher(continueOnError: false, failOnError: true,
                     publishers: [
