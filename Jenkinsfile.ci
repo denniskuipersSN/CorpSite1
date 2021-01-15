@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools { 
-        maven 'maven'
+        maven 'Jenkins Maven'
     }
 
     stages {
@@ -32,13 +32,13 @@ pipeline {
                     sshPublisher(continueOnError: false, failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName:'CorpSite UAT',
+                            configName:'CorpSite',
                             verbose: true,
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: 'target/globex-web.war',
                                     removePrefix: 'target/',
-                                    remoteDirectory: '/opt/tomcat/webapps'
+                                    remoteDirectory: '/var/lib/tomcat/webapps'
                                 )
                             ]
                         )
