@@ -1,6 +1,4 @@
 import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
-import org.codehaus.groovy.runtime.StackTraceUtils
 
 @NonCPS
 def parseJsonText(String json) {
@@ -87,7 +85,7 @@ pipeline {
 										throw new Exception('Error');
 										break;
 									}
-									count++;
+										count++;
 									Thread.sleep(1000 * 30)
 								} catch(e) {
 									println("Exception reported:"+e);
