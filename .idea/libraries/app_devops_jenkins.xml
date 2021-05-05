@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="app-devops-jenkins">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/app-devops-jenkins.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
