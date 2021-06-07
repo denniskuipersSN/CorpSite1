@@ -1,25 +1,43 @@
 pipeline {
     agent any
-    tools { 
+    tools {
         maven 'maven'
     }
 
     stages {
         stage('Build') {
             steps {
-                snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
                     export PATH=$PATH:$M2_HOME/bin
                     mvn --version
                 '''
-                sh 'mvn compile'   
+                sh 'mvn compile'
+                snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "globex-web.war","version":"2.${env.BUILD_NUMBER}.0","semanticVersion": "2.${env.BUILD_NUMBER}.0","repositoryName": "Repo1"}]}""")
+
+            }
+        }
+
+    stage("Docker Login"){
+        withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+            sh 'docker login -u denniskuiperssn -p $PASSWORD'
+        }
+    }
+
+    stages {
+        stage('Docker Build') {
+            steps {
+                    sh 'docker version'
+                    sh 'docker build -t corpsite .'
+                    sh 'docker image list'
+                    sh 'docker tag corpsite denniskuiperssn/demokubernetes:corpsite'
+                    sh 'docker push denniskuiperssn/demokubernetes:corpsite'
+                    sh ''
             }
         }
 
         stage('Test') {
             steps {
-                snDevOpsStep()
                 sh '''
                     export M2_HOME=/opt/apache-maven-3.6.0 # your Mavan home path
                     export PATH=$PATH:$M2_HOME/bin
@@ -27,38 +45,14 @@ pipeline {
                 '''
 
                 sh 'mvn verify'
-                junit skipPublishingChecks: true, allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
-                script {
-                    sshPublisher(continueOnError: false, failOnError: true,
-                    publishers: [
-                        sshPublisherDesc(
-                            configName:'CorpSite',
-                            verbose: true,
-                            transfers: [
-                                sshTransfer(
-                                    sourceFiles: 'target/globex-web.war',
-                                    removePrefix: 'target/',
-                                    remoteDirectory: '/var/lib/tomcat/webapps'
-                                )
-                            ]
-                        )
-                    ])
-                }
+                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
             }
             post {
                 success {
-                    junit '**/target/surefire-reports/*.xml' 
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
 
-        stage('Publish') {
-            steps {
-                snDevOpsStep()
-                snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "globex-web.war","version":"2.${env.BUILD_NUMBER}.0","semanticVersion": "2.${env.BUILD_NUMBER}.0","repositoryName": "Repo1"}]}""")
-                snDevOpsChange()
-            }
-        }
     }
 }
-
